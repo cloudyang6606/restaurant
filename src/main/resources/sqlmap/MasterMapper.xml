@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njust.edu.dao.MasterMapper" >
+  <resultMap id="BaseResultMap" type="com.njust.edu.entity.Master" >
+    <id column="master_id" property="masterId" jdbcType="INTEGER" />
+    <result column="master_name" property="masterName" jdbcType="VARCHAR" />
+    <result column="master_pwd" property="masterPwd" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    master_id, master_name, master_pwd
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from master
+    where master_id = #{masterId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from master
+    where master_name = #{masterName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from master
+    where master_id = #{masterId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njust.edu.entity.Master" >
+    insert into master (master_id, master_name, master_pwd
+      )
+    values (#{masterId,jdbcType=INTEGER}, #{masterName,jdbcType=VARCHAR}, #{masterPwd,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.njust.edu.entity.Master" >
+    insert into master
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="masterId != null" >
+        master_id,
+      </if>
+      <if test="masterName != null" >
+        master_name,
+      </if>
+      <if test="masterPwd != null" >
+        master_pwd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="masterId != null" >
+        #{masterId,jdbcType=INTEGER},
+      </if>
+      <if test="masterName != null" >
+        #{masterName,jdbcType=VARCHAR},
+      </if>
+      <if test="masterPwd != null" >
+        #{masterPwd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njust.edu.entity.Master" >
+    update master
+    <set >
+      <if test="masterName != null" >
+        master_name = #{masterName,jdbcType=VARCHAR},
+      </if>
+      <if test="masterPwd != null" >
+        master_pwd = #{masterPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where master_id = #{masterId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njust.edu.entity.Master" >
+    update master
+    set master_name = #{masterName,jdbcType=VARCHAR},
+      master_pwd = #{masterPwd,jdbcType=VARCHAR}
+    where master_id = #{masterId,jdbcType=INTEGER}
+  </update>
+</mapper>

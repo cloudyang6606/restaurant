@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加餐厅信息</title>
+</head>
+<body>
+<form type="post" id="form">
+    店主编号:<input type="number" name="masterId" /><br>
+
+    餐厅编号:<input type="number" name="restaurantId" required/><br/>
+
+    餐厅名称:<input type="text" name="restaurantName" required/><br/>
+
+    餐厅地址:<input type="text" name="address" required/><br/>
+
+    描述:<input type="text" name="description" required/><br/>
+
+    <button onclick="addRestaurant()">提交</button>
+
+</form>
+<code>
+
+</code>
+</body>
+<script>
+    function addRestaurant() {
+        $.ajax({
+            type:"post",
+            datatype:"json",
+            url:"addRestaurant",
+            data:$("#form").serialize(),
+            success:function (msg) {
+                if(msg.success ==true){
+                    location.href="login.html";
+                } else{
+                    if(msg.message =="101") alert("餐厅id已存在");
+
+                }
+            },
+            error:function (){
+                alert("添加失败");
+            }
+
+        })
+
+    }
+</script>
+</html>

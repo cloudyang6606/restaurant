@@ -1,13 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hp
-  Date: 2019/7/30
-  Time: 15:29
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
+<!DOCTYPE html>
 <html>
 <head>
     <title>菜单</title>
@@ -17,14 +11,14 @@
 <body>
 <div>
     <h1>${restaurantName}菜单管理</h1>
-    <form id="form" method="post">
+    <form id="form" method="post" action="addFood">
         <table border="1">
             <thead>
             <tr>
                 <td>编号</td>
                 <td>名称</td>
-                <td>单价</td>
-                <td>折扣</td>
+                <td>单价/元</td>
+                <td>折扣/%</td>
                 <td>类型</td>
                 <td>描述</td>
                 <td>操作</td>
@@ -40,7 +34,7 @@
                     <td>${menu.type}</td>
                     <td>${menu.description}</td>
                     <td>
-                        <a href="../deleteFood？foodId=${menu.foodId}">删除</a>
+                        <a href="deleteFood?foodId=${menu.foodId}">删除</a>
                         <!--<button type="button" onclick="">修改</button>
                         <button type="button" onclick="deleteFood()">删除</button> -->
                     </td>
