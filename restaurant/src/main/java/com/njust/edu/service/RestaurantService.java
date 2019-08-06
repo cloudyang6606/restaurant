@@ -17,6 +17,14 @@ public class RestaurantService {
         return restaurantMapper.insertSelective(restaurant);
 
     }
+
+    public Restaurant findRestaurant(int id) {
+         return restaurantMapper.selectByPrimaryKey(id);
+    }
+    public Restaurant findByMaster(int masterId){
+        return restaurantMapper.selectByMaster(masterId);
+    }
+
     public Map<String,Object> addRestaurant(Restaurant restaurant){
         Map<String,Object> map=new HashMap<>();
         if(restaurantMapper.selectByPrimaryKey(restaurant.getRestaurantId()) ==null){

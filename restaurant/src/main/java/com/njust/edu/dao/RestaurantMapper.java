@@ -20,4 +20,6 @@ public interface RestaurantMapper {
     int updateByPrimaryKey(Restaurant record);
 
     List<Restaurant> selectAll();
+
+    Restaurant selectByMaster(int masterId);
 }

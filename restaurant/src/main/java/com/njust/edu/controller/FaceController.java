@@ -1,7 +1,10 @@
 package com.njust.edu.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.baidu.aip.util.Base64Util;
+import com.njust.edu.entity.ReData;
 import com.njust.edu.service.FaceService;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping("/user")
 public class FaceController {
     private static final Logger log= LoggerFactory.getLogger(FaceController.class);
     @Resource
@@ -29,9 +33,10 @@ public class FaceController {
      * @param image 用户注册用图片
      * @return
      */
-    @RequestMapping("/RegisterFace")
-    public ModelAndView RegisterFace(String userName,String userPwd,String image){
+    @RequestMapping("/registerFace")
+    public ModelAndView registerFace(String userName,String userPwd,String image){
         ModelAndView modelAndView=new ModelAndView();
+        log.info("注册用户"+userName);
 
 
         String msg;
@@ -42,7 +47,7 @@ public class FaceController {
             msg="注册失败，请重新尝试";
 
         }
-        modelAndView.setViewName("login");
+        modelAndView.setViewName("loginFace");
         modelAndView.addObject("message",msg);
         return modelAndView;
     }
@@ -53,17 +58,19 @@ public class FaceController {
      * @param response
      * @return
      */
-    @RequestMapping("/LoginFace")
+    @RequestMapping("/loginFace")
     @ResponseBody
-    public String LoginFace(HttpServletRequest request, HttpServletResponse response){
-
+    public String loginFace(HttpServletRequest request, HttpServletResponse response){
+        log.info("用户登录");
         String userId;
         String image=request.getParameter("image");
         userId=faceService.login(image);
+        ReData data=new ReData();
         if(userId.equals("fail")){
-            return "";
+            data.setMessage("登录失败，请尝试换一种方式登录");
+            return JSON.toJSONString(data);
         }
-        return userId;
+        return "loginSuccess";
     }
 
     /**
@@ -72,12 +79,13 @@ public class FaceController {
      * @param response
      * @return
      */
-    @RequestMapping("/UpdateFace")
-    public String UpdateFace(HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping("/updateFace")
+    public String updateFace(HttpServletRequest request, HttpServletResponse response){
+        ReData data=new ReData();
         String image=request.getParameter("image");
         String userName=request.getParameter("userId");
-        String msg=faceService.updateFace(image,userName);
-        return msg;
+        data.setMessage(faceService.updateFace(image,userName));
+        return JSON.toJSONString(data);
 
     }
 
@@ -86,13 +94,14 @@ public class FaceController {
      * @param image
      * @return
      */
-    @RequestMapping("/DetectFace")
-    public String DetectFace(String image){
-        String message="fail";
-        message=faceService.detectFace(image);
+    @RequestMapping("/detectFace")
+    @ResponseBody
+    public String detectFace(String image){
 
+        ReData data=new ReData();
+        data.setMessage(faceService.detectFace(image));
 
-        return message;
+        return JSON.toJSONString(data);
     }
 
 

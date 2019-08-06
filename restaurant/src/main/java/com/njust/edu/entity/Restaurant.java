@@ -9,13 +9,16 @@ public class Restaurant {
 
     private String description;
 
+    private int masterId;
+
     public Restaurant(){}
 
-    public Restaurant(Integer restaurantId, String name, String address, String description) {
+    public Restaurant(Integer restaurantId, String name, String address, String description, Integer masterId) {
         this.restaurantId = restaurantId;
         this.name = name;
         this.address = address;
         this.description = description;
+        this.masterId = masterId;
     }
 
     public Integer getRestaurantId() {
@@ -48,5 +51,13 @@ public class Restaurant {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getMasterId() {
+        return masterId;
+    }
+
+    public void setMasterId(int masterId) {
+        this.masterId = masterId;
     }
 }

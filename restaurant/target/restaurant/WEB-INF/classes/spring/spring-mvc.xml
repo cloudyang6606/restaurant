@@ -12,7 +12,6 @@
     <!--============================================= 扫描controller ================================================-->
     <context:component-scan base-package="com.njust.edu.controller"/>
 
-
     <!--=================================== 静态页面交由默认web servlet处理 =========================================-->
     <!-- 默认的注解映射的支持 -->
     <mvc:annotation-driven/>
@@ -25,6 +24,7 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
     <!-- ======================================== ViewResolver config ============================================== -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>

@@ -14,7 +14,7 @@
             <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳 -->
         </commentGenerator>
 
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        <jdbcConnection driverClass="${driver}"
                         connectionURL="${url}"
                         userId="root"
                         password="root" />
@@ -25,14 +25,14 @@
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.njust.edu.entity"
-                            targetProject="src/main/java" />
-        <sqlMapGenerator targetPackage="sqlmap" targetProject="src/main/resources" />
-        <javaClientGenerator targetPackage="com.njust.edu.dao"
-                             targetProject="src/main/java" type="XMLMAPPER" />
+        <javaModelGenerator targetPackage="${modelPackage}"
+                            targetProject="${modelProject}" />
+        <sqlMapGenerator targetPackage="${sqlPackage}" targetProject="${sqlProject}" />
+        <javaClientGenerator targetPackage="${mapperPackage}"
+                             targetProject="${mapperProject}" type="XMLMAPPER" />
 
         <!-- 如果需要通配所有表 直接用sql的通配符    %即可 -->
-        <table schema="" tableName="user" enableCountByExample="false"
+        <table schema="" tableName="master" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"/>
 

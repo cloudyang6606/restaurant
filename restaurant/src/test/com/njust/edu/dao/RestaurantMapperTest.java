@@ -28,10 +28,11 @@ public class RestaurantMapperTest {
     @Test
     public void insert(){
         Restaurant restaurant=new Restaurant();
-        restaurant.setRestaurantId(2);
+        restaurant.setRestaurantId(4);
         restaurant.setName("理工大炒饭");
         restaurant.setAddress("南京理工大学");
         restaurant.setDescription("好吃的炒饭");
+        restaurant.setMasterId(4);
         int a=mapper.insert(restaurant);
         System.out.println(a);
         assert(a==1);
@@ -43,6 +44,7 @@ public class RestaurantMapperTest {
         restaurant.setName("理工大黄焖鸡");
         restaurant.setAddress("南京理工大学");
         restaurant.setDescription("黄焖鸡米饭");
+        restaurant.setMasterId(1);
         int a=mapper.updateByPrimaryKeySelective(restaurant);
         System.out.println(a);
         assert(a==1);
@@ -50,7 +52,7 @@ public class RestaurantMapperTest {
 
     @Test
     public void delete(){
-        int id=2;
+        int id=4;
         int a=mapper.deleteByPrimaryKey(id);
         assert (a==1);
     }

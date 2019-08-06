@@ -22,7 +22,7 @@
   </select>
   <select id="selectByRestaurant" resultType="com.njust.edu.entity.Menu">
     select
-    food_id,name,price,discount,descriptin,type
+    food_id,name,price,discount,description,type
     from menu
     where restaurant_id=#{restaurantId,jdbcType=INTEGER}
 
