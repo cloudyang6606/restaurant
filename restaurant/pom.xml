@@ -23,7 +23,7 @@
     <!-- mybatis版本号 -->
     <mybatis.version>3.2.4</mybatis.version>
     <!-- spring版本号 -->
-    <spring.version>5.1.8.RELEASE</spring.version>
+    <spring.version>6.0.0</spring.version>
     <!--log4j版本号-->
     <log4j.version>2.10.0</log4j.version>
     <!--lombok -->
